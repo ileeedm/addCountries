@@ -98,8 +98,15 @@ else if (input) {
 
 
 app.post("/new", async (req, res) => {
-  //Hint: The RETURNING keyword can return the data that was inserted.
-  //https://www.postgresql.org/docs/current/dml-returning.html
+ 
+  const name = req.body.name
+  const color = req.body.color
+  console.log(name)
+  console.log(color)
+  await db.query("INSERT INTO users (name,color) VALUES ($1,$2)",
+  [name,color]
+  );
+  res.redirect('/')
 });
 
 app.listen(port, () => {
